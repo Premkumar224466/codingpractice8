@@ -22,14 +22,14 @@ const initializeDbAndServer = async () => {
      console.log("Server Running at http://localhost:3000/")
    );
   } catch (error) {
-    console log(`DB Error: ${error.message}`);
+    console.log(`DB Error: ${error.message}`);
     process.exit(1);
   }
 };
 
 initializeDBANdServer();
 
-cost hasPriorityAndStatusProperties = (requestQuery) => {
+const hasPriorityAndStatusProperties = (requestQuery) => {
   return (
    requestQuery.priority !== undefined && requestQuery.status !== undefined
   );

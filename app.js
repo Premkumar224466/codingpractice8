@@ -27,7 +27,7 @@ const initializeDbAndServer = async () => {
   }
 };
 
-initializeDBANdServer();
+initializeDbANdServer();
 
 const hasPriorityAndStatusProperties = (requestQuery) => {
   return (
@@ -108,7 +108,7 @@ app.get("/todos/:todoId/", async (request, response) => {
 });
 
 app.post("/todos/", async (request, response) => {
-  const {id, todo, priority, status } request.body;
+  const {id, todo, priority, status } = request.body;
   const postTodoQuery = `
   INSERT INTO
     todo (id, todo, priority, status)
@@ -163,7 +163,7 @@ app.put("/todos/:todoId/", async (request, response) => {
 });
 
 app.delete("/todos/:todoId", async (request, response) => {
-  const { todoId } = request,params;
+  const { todoId } = request.params;
   const deleteTodoQuery = `
   DELETE FROM
     todo

@@ -13,14 +13,14 @@ let database = null;
 
 const initializeDbAndServer = async () => {
   try {
-   database = await open({
-       filename: databasePath,
-       driver: sqlite3.Database,
-   });
+    database = await open({
+      filename: databasePath,
+      driver: sqlite3.Database,
+    });
 
-   app.listen(3000, () =>
-     console.log("Server Running at http://localhost:3000/")
-   );
+    app.listen(3000, () =>
+      console.log("Server Running at http://localhost:3000/")
+    );
   } catch (error) {
     console.log(`DB Error: ${error.message}`);
     process.exit(1);
@@ -31,7 +31,7 @@ initializeDbAndServer();
 
 const hasPriorityAndStatusProperties = (requestQuery) => {
   return (
-   requestQuery.priority !== undefined && requestQuery.status !== undefined
+    requestQuery.priority !== undefined && requestQuery.status !== undefined
   );
 };
 
@@ -49,7 +49,7 @@ app.get("/todos/", async (request, response) => {
 
   switch (true) {
     case hasPriorityAndStatusProperties(request.query):
-    getTodosQuery = `
+      getTodosQuery = `
     SELECT 
       *
     FROM
@@ -58,9 +58,9 @@ app.get("/todos/", async (request, response) => {
       todo LIKE '%${search_q}%'
       AND status = '${status}'
       AND priority = '${priority}';`;
-    break;
-   case hasPriorityProperty(request.query):
-     getTodosQuery = `
+      break;
+    case hasPriorityProperty(request.query):
+      getTodosQuery = `
      SELECT
        *
      FROM
@@ -68,19 +68,19 @@ app.get("/todos/", async (request, response) => {
      WHERE 
        todo LIKE '%${search_q}%'
        AND priority = '${priority}';`;
-    break;
-   case hasStatusProperty(request.query):
-     getTodosQuery = `
+      break;
+    case hasStatusProperty(request.query):
+      getTodosQuery = `
     SELECT
        *
      FROM
        todo
      WHERE 
        todo LIKE '%${search_q}%'
-       AND status = '${priority}';`;
-    break;
+       AND status = '${status}';`;
+      break;
     default:
-     getTodoQuery = `
+      getTodoQuery = `
      SELECT
        *
      FROM
@@ -108,7 +108,7 @@ app.get("/todos/:todoId/", async (request, response) => {
 });
 
 app.post("/todos/", async (request, response) => {
-  const {id, todo, priority, status } = request.body;
+  const { id, todo, priority, status } = request.body;
   const postTodoQuery = `
   INSERT INTO
     todo (id, todo, priority, status)
@@ -169,7 +169,7 @@ app.delete("/todos/:todoId", async (request, response) => {
     todo
   WHERE
     id = ${todoId};`;
-    
+
   await database.run(deleteTodoQuery);
   response.send("Todo Deleted");
 });

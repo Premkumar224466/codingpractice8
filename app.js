@@ -27,7 +27,7 @@ const initializeDbAndServer = async () => {
   }
 };
 
-initializeDbANdServer();
+initializeDbAndServer();
 
 const hasPriorityAndStatusProperties = (requestQuery) => {
   return (

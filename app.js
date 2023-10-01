@@ -102,7 +102,7 @@ app.get("/todos/:todoId/", async (request, response) => {
     FROM
       todo
     WHERE
-      id = $(todoId);`;
+      id = ${todoId};`;
   const todo = await database.get(getTodoQuery);
   response.send(todo);
 });
